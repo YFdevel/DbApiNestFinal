@@ -1,0 +1,48 @@
+{{#if result}}
+
+<div class="cards-wrapper">
+    <div class="card">
+        <div class="card-content">
+            <h5 class="card-title">{{result.title}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted"> Автор: {{result.user.firstName}}
+            </h6>
+            <h6 class="card-subtitle mb-2 text-muted"> Дата создания: {{result.createdAt}}
+            </h6>
+            <p class="card-text">{{result.description}}</p>
+        </div>
+        <div id="app">
+
+            <div class="card-comments">
+                <h3 class="text-center">${ titleComment }</h3>
+
+                <div id="comments">
+                    <div id="block-comments" class="block-comments">
+                        <ul>
+                            <li v-for="comment of comments">
+                            <div class="li-wrapper">
+                            <div class="li-com-wrapper">
+                                <span> ${ comment.user.firstName }:</span>
+                                 <input class="comm-input" @click.prevent="changeInputStatus" @change="prepareUpdateComment" v-bind:user="comment.user.id" v-bind:comment="comment.id" v-bind:value="comment.text" readonly/>
+                                 </div>
+                                <div class="btn-com-wrapper">
+                                <span class="update-btn-comm" v-bind:user="comment.user.id" v-bind:value="comment.id" @click.prevent="updateComment">Change</span>
+                                <span class="delete-btn-comm" v-bind:user="comment.user.id" v-bind:value="comment.id" @click.prevent="deleteComment">x</span>
+                            </div>
+                            </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                    <textarea class="textarea" v-model="comment" placeholder="Сообщение..."></textarea>
+                    <button id="send-comment" class="btn" @click.prevent="sendComment">Отправить комментарий</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    {{else}}
+    <h1>Запрашиваемый пост отсутствует!</h1>
+    {{/if}}
